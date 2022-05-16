@@ -10,4 +10,5 @@
     <color name="shado_black">#333333</color>
     <color name="ashe_black">#534D4D</color>
     <color name="blue">#0A84FF</color>
+    <color name="shimmerColor">#dddddd</color>
 </resources>
