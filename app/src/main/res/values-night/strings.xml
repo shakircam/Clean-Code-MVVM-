@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="commits">Commits</string>
+    <string name="profile">User Profile</string>
+    <string name="title">Flutter Commit List</string>
+    <string name="master">master</string>
+    <string name="titletx">Fixed All bugs</string>
+    <string name="timeTx">10:40</string>
+    <string name="nametx">Ibrahim</string>
+</resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/shado_black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.commits.CommitFragment">
+
+    <TextView
+        android:id="@+id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title" />
+
+    <com.google.android.material.chip.Chip
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/master"
+        android:textColor="@color/white"
+        app:chipBackgroundColor="@color/ashe_black"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"/>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/recycler_item_row"
+        android:layout_marginTop="10dp"
+        android:layout_height="0dp"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

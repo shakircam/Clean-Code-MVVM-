@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GTAF Assesment</string>
+    <string name="commits">Commits</string>
+    <string name="profile">User Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Flutter Commit List</string>
+    <string name="master">master</string>
+    <string name="titletx">Fixed All bugs</string>
+    <string name="timeTx">10:40</string>
+    <string name="nametx">Ibrahim</string>
+</resources>
