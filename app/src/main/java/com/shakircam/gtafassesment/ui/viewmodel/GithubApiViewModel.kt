@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -36,8 +37,21 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp, applic
     private fun handleCommitsResponse(response: Response<MutableList<Commits.CommitsItem>>) : Resource<MutableList<Commits.CommitsItem>> {
         if(response.isSuccessful) {
             response.body()?.let { resultResponse ->
+
+              val list = mutableListOf<Commits.CommitsItem>()
+
+                Log.d("tag","list size before delete::${list.size}")
+                for (element in resultResponse){
+                    if (element.commit.author.name.startsWith("e") || element.commit.author.name.startsWith("x")){
+                        list.add(element)
+                    }
+                }
+
+                resultResponse.removeAll(list)
+                Log.d("tag","list size after delete::${list.size}")
                 return Resource.Success(resultResponse)
             }
+
         }
         return Resource.Error(response.message())
     }
@@ -72,8 +86,8 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp, applic
             response.message().toString().contains("timeout") -> {
                 return Resource.Error("Timeout")
             }
-            response.code() == 402 -> {
-                return Resource.Error("API Key Limited.")
+            response.code() == 401 -> {
+                return Resource.Error("Resource not found.")
             }
 
             response.isSuccessful -> {
