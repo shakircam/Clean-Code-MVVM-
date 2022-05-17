@@ -7,13 +7,12 @@ import com.shakircam.gtafassesment.utils.Resource
 import retrofit2.Response
 
 class GithubApiRepositoryImp  {
-    suspend fun getUsers(username: String): Resource<GithubUser> {
-        TODO("Not yet implemented")
+    suspend fun getGithubUserProfile(): Response<GithubUser> {
+        return ApiService.api.getGithubUserProfile()
     }
 
      suspend fun getGithubCommit(): Response<MutableList<Commits.CommitsItem>> {
        return ApiService.api.getGithubCommit()
     }
-
 
 }

@@ -14,6 +14,7 @@ import androidx.lifecycle.viewModelScope
 import com.shakircam.gtafassesment.data.repository.GithubApiRepository
 import com.shakircam.gtafassesment.data.repository.GithubApiRepositoryImp
 import com.shakircam.gtafassesment.model.Commits
+import com.shakircam.gtafassesment.model.GithubUser
 import com.shakircam.gtafassesment.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -23,6 +24,7 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : View
 
     /** RETROFIT */
      var commitsResponse: MutableLiveData<Resource<MutableList<Commits.CommitsItem>>> = MutableLiveData()
+     var userResponse: MutableLiveData<Resource<GithubUser>> = MutableLiveData()
 
 
     init {
@@ -35,6 +37,7 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : View
         commitsResponse.postValue(handleCommitsResponse(response))
     }
 
+
     private fun handleCommitsResponse(response: Response<MutableList<Commits.CommitsItem>>) : Resource<MutableList<Commits.CommitsItem>> {
         if(response.isSuccessful) {
             response.body()?.let { resultResponse ->
@@ -42,23 +45,47 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : View
                 val filterList = mutableListOf<Commits.CommitsItem>()
                 val filterList1 = mutableListOf<Commits.CommitsItem>()
 
+                /** we are checking user name starts with g & x .If match with condition then we are keeping those a list.After that removing from main list.
+                   And finally keeping only last 10 commits   */
+
+
                 for (element in resultResponse){
                     if (element.commit.author.name.startsWith("g") || element.commit.author.name.startsWith("x")){
                         filterList.add(element)
-                        Log.d("tag","date format::${element.commit.author.date}")
                     }
                 }
 
                 resultResponse.removeAll(filterList)
-                var flag = 0
+                var commitItem = 0
                 for (i in resultResponse){
 
-                    if (flag<10){
+                    if (commitItem<10){
                         filterList1.add(i)
-                        flag++
+                        commitItem++
                     }
                 }
                 return Resource.Success(filterList1)
+            }
+
+        }
+        return Resource.Error(response.message())
+    }
+
+    init {
+        getUserProfile()
+    }
+
+    private fun getUserProfile() = viewModelScope.launch {
+        userResponse.postValue(Resource.Loading())
+        val response = repository.getGithubUserProfile()
+        userResponse.postValue(handleUserProfileResponse(response))
+    }
+
+    private fun handleUserProfileResponse(response: Response<GithubUser>) : Resource<GithubUser> {
+        if(response.isSuccessful) {
+            response.body()?.let { resultResponse ->
+
+                return Resource.Success(resultResponse)
             }
 
         }

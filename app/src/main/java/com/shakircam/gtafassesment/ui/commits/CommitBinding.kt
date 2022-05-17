@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.shakircam.gtafassesment.model.GithubUser
 import java.text.SimpleDateFormat
 
 
@@ -16,7 +17,7 @@ class CommitBinding {
 
         @BindingAdapter("loadImageFromUrl")
         @JvmStatic
-        fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
+        fun loadImageFromUrl(imageView: ImageView, imageUrl: String?) {
             imageView.load(imageUrl) {
                 crossfade(600)
             }
@@ -32,6 +33,19 @@ class CommitBinding {
             val formatter = SimpleDateFormat("MM/dd/yyyy")
             val formattedDate = formatter.format(parser.parse(date)!!)
             textView.text = formattedDate
+        }
+
+
+        @BindingAdapter("repoIntToString")
+        @JvmStatic
+        fun repoIntToString(textView: TextView,githubUser: GithubUser?){
+            textView.text = githubUser?.publicRepos.toString()
+        }
+
+        @BindingAdapter("gistIntToString")
+        @JvmStatic
+        fun gistIntToString(textView: TextView,githubUser: GithubUser?){
+            textView.text = githubUser?.publicGists.toString()
         }
     }
 }

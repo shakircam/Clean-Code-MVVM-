@@ -1,6 +1,5 @@
 package com.shakircam.gtafassesment.ui.commits
 
-import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.shakircam.gtafassesment.data.repository.GithubApiRepositoryImp
 import com.shakircam.gtafassesment.databinding.FragmentCommitBinding
-import com.shakircam.gtafassesment.model.Commits
 import com.shakircam.gtafassesment.ui.viewmodel.GithubApiViewModel
 import com.shakircam.gtafassesment.ui.viewmodel.GithubApiViewModelFactory
 import com.shakircam.gtafassesment.utils.Resource
@@ -22,6 +20,7 @@ import com.shakircam.gtafassesment.utils.Resource
 class CommitFragment : Fragment() {
     private var _binding: FragmentCommitBinding? = null
     private val binding get() = _binding!!
+
     private val adapter by lazy { CommitAdapter() }
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
     private lateinit var githubApiViewModel: GithubApiViewModel
