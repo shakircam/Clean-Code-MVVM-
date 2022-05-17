@@ -1,13 +1,14 @@
 package com.shakircam.gtafassesment.ui.commits
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.bumptech.glide.Glide
+import com.shakircam.gtafassesment.R
 import com.shakircam.gtafassesment.model.GithubUser
+import com.shakircam.gtafassesment.ui.commits.CommitBinding.Companion.setRepo
 import java.text.SimpleDateFormat
 
 
@@ -23,7 +24,18 @@ class CommitBinding {
             }
         }
 
-        @RequiresApi(Build.VERSION_CODES.O)
+
+        @BindingAdapter("loadUserImage")
+        @JvmStatic
+        fun loadUserImage(imageView: ImageView, imageUrl: String?) {
+            Glide.with(imageView.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.profile)
+                .error(R.drawable.profile)
+                .into(imageView)
+        }
+
+
         @SuppressLint("SimpleDateFormat")
         @BindingAdapter("timeFormat")
         @JvmStatic
@@ -36,16 +48,26 @@ class CommitBinding {
         }
 
 
-        @BindingAdapter("repoIntToString")
+        @SuppressLint("SetTextI18n")
+        @BindingAdapter("repo")
         @JvmStatic
-        fun repoIntToString(textView: TextView,githubUser: GithubUser?){
-            textView.text = githubUser?.publicRepos.toString()
+        fun TextView.setRepo(repo: GithubUser?) {
+            this.text =
+                  "${this.context.getString(R.string.repo)} ${repo?.public_repos.toString()}"
         }
 
-        @BindingAdapter("gistIntToString")
+        @SuppressLint("SetTextI18n")
+        @BindingAdapter("gist")
         @JvmStatic
-        fun gistIntToString(textView: TextView,githubUser: GithubUser?){
-            textView.text = githubUser?.publicGists.toString()
+        fun TextView.setGist(gist: GithubUser?){
+            this.text = "${this.context.getString(R.string.gist)} ${gist?.public_gists.toString()}"
+        }
+
+        @SuppressLint("SetTextI18n")
+        @BindingAdapter("bio")
+        @JvmStatic
+        fun TextView.setBio(bio: GithubUser?){
+            this.text = "${this.context.getString(R.string.bio)} ${bio?.bio.toString()}"
         }
     }
 }

@@ -2,14 +2,10 @@ package com.shakircam.gtafassesment.ui.profile
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import coil.load
-import com.shakircam.gtafassesment.R
 import com.shakircam.gtafassesment.data.repository.GithubApiRepositoryImp
 import com.shakircam.gtafassesment.databinding.FragmentUserProfileBinding
 import com.shakircam.gtafassesment.model.GithubUser
@@ -32,22 +28,15 @@ class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
         val viewModelProviderFactory = GithubApiViewModelFactory(githubApiRepository)
         githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory).get(GithubApiViewModel::class.java)
 
-        githubApiViewModel.userResponse.observe(viewLifecycleOwner){ user->
-            val user = user.data
-            Log.d("tag","image::${user?.avatarUrl}")
-            binding.user = GithubUser(user?.avatarUrl,user?.name,user?.location,user?.bio,
-                user?.publicRepos,user?.publicGists)
-
-            /*
-            binding.imageView.load("https://avatars.githubusercontent.com/u/47291818?v=4"){
-                crossfade(600)
-            }
-            binding.nameTv.text = user.data?.name
-            binding.emailTv.text = user.data?.name
-            binding.bioTv.text = user.data?.bio
-            binding.emailTv.text = user.data?.location
-            binding.publicRepoTv.text = user.data?.publicRepos.toString()
-            binding.publicGistTv.text = user.data?.publicGists.toString()*/
+        githubApiViewModel.userResponse.observe(viewLifecycleOwner){ result->
+            val user = result.data
+            binding.user = GithubUser(
+                user?.avatar_url,user?.name,
+                user?.location,user?.bio,
+                user?.public_repos,user?.public_gists
+            )
+            Log.d("tag","image::${user?.avatar_url}")
+            Log.d("tag","bio::${user?.bio}")
         }
     }
 }

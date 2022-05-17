@@ -10,6 +10,6 @@ interface GithubInterface {
     @GET("repos/flutter/flutter/commits")
     suspend fun getGithubCommit(): Response<MutableList<Commits.CommitsItem>>
 
-    @GET("users/shakircam")
+    @GET("users/hasancse91")
     suspend fun getGithubUserProfile(): Response<GithubUser>
 }

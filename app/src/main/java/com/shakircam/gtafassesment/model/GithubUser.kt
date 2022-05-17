@@ -6,12 +6,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class GithubUser(
-
-    @SerializedName("avatar_url") var avatarUrl: String?,
-    @SerializedName("name") var name: String?,
-    @SerializedName("location") var location: String?,
-    @SerializedName("bio") var bio: String?,
-    @SerializedName("public_repos") var publicRepos: Int?,
-    @SerializedName("public_gists") var publicGists: Int?
-
+     var avatar_url: String?,
+     var name: String?,
+     var location: String?,
+     var bio: String?,
+     var public_repos: Int?,
+     var public_gists: Int?
 )
