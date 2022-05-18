@@ -9,7 +9,12 @@
         android:id="@+id/commitFragment"
         android:name="com.shakircam.gtafassesment.ui.commits.CommitFragment"
         android:label="Commits"
-        tools:layout="@layout/fragment_commit" />
+        tools:layout="@layout/fragment_commit" >
+
+        <action
+            android:id="@+id/action_commitFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.shakircam.gtafassesment.ui.profile.UserProfileFragment"
