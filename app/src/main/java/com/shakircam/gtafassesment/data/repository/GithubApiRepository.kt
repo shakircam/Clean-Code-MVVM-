@@ -7,7 +7,7 @@ import retrofit2.Response
 
 interface GithubApiRepository {
 
-    suspend fun getGithubUserProfile(): Resource<GithubUser>
+    suspend fun getGithubUserProfile(): Response<GithubUser>
     suspend fun getGithubCommit(): Response<MutableList<Commits.CommitsItem>>
 
 }
