@@ -7,10 +7,14 @@
         <variable
             name="commit"
             type="com.shakircam.gtafassesment.model.Commits.CommitsItem" />
+        <variable
+            name="click"
+            type="com.shakircam.gtafassesment.ui.commits.CommitBinding" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{view ->click.onClickListener(view)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/shado_black">

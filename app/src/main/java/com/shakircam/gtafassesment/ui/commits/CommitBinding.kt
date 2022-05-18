@@ -2,10 +2,12 @@ package com.shakircam.gtafassesment.ui.commits
 
 import android.annotation.SuppressLint
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.bumptech.glide.Glide
 import com.shakircam.gtafassesment.R
@@ -71,17 +73,17 @@ class CommitBinding {
             this.text = "${this.context.getString(R.string.bio)} ${bio?.bio.toString()}"
         }
 
-          @BindingAdapter("onClickListener")
-        @JvmStatic
-        fun onClick(rowLayout: ConstraintLayout){
-            rowLayout.setOnClickListener {
-                try {
-
-                } catch (e: Exception) {
-                    Log.d("onCommitItemClick", e.toString())
-                }
-        }
     }
+
+
+    fun onClickListener(view: View){
+
+             try {
+                 val action = CommitFragmentDirections.actionCommitFragmentToUserProfileFragment()
+                 view.findNavController().navigate(action)
+             } catch (e: Exception) {
+                 Log.d("onCommitItemClick", e.toString())
+             }
 
     }
 }

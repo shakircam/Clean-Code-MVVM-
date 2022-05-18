@@ -9,39 +9,38 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewbinding.ViewBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.shakircam.gtafassesment.data.repository.GithubApiRepositoryImp
 import com.shakircam.gtafassesment.databinding.FragmentCommitBinding
+import com.shakircam.gtafassesment.databinding.FragmentUserProfileBinding
 import com.shakircam.gtafassesment.ui.viewmodel.GithubApiViewModel
 import com.shakircam.gtafassesment.ui.viewmodel.GithubApiViewModelFactory
+import com.shakircam.gtafassesment.utils.BindingFragment
 import com.shakircam.gtafassesment.utils.Resource
 
 
-class CommitFragment : Fragment() {
-    private var _binding: FragmentCommitBinding? = null
-    private val binding get() = _binding!!
+class CommitFragment : BindingFragment<FragmentCommitBinding>() {
+
 
     private val adapter by lazy { CommitAdapter() }
     private lateinit var shimmerFrameLayout: ShimmerFrameLayout
     private lateinit var githubApiViewModel: GithubApiViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentCommitBinding.inflate(inflater, container, false)
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentCommitBinding::inflate
+
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val githubApiRepository = GithubApiRepositoryImp()
         val viewModelProviderFactory = GithubApiViewModelFactory(githubApiRepository)
         githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory).get(GithubApiViewModel::class.java)
         shimmerFrameLayout = binding.shimmerLayout
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-
         githubApiViewModel.commitsResponse.observe(viewLifecycleOwner){ response ->
 
             when(response){
@@ -82,8 +81,5 @@ class CommitFragment : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL,false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.shakircam.gtafassesment.data.repository.GithubApiRepositoryImp
@@ -15,19 +16,18 @@ import com.shakircam.gtafassesment.utils.BindingFragment
 
 
 class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
-
     private lateinit var githubApiViewModel: GithubApiViewModel
 
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentUserProfileBinding::inflate
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val githubApiRepository = GithubApiRepositoryImp()
         val viewModelProviderFactory = GithubApiViewModelFactory(githubApiRepository)
-        githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory).get(GithubApiViewModel::class.java)
-
+        githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory)[GithubApiViewModel::class.java]
         githubApiViewModel.userResponse.observe(viewLifecycleOwner){ result->
             val user = result.data
             binding.user = GithubUser(
@@ -35,8 +35,7 @@ class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
                 user?.location,user?.bio,
                 user?.public_repos,user?.public_gists
             )
-            Log.d("tag","image::${user?.avatar_url}")
-            Log.d("tag","bio::${user?.bio}")
+
         }
     }
 }
