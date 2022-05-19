@@ -6,9 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class ApiService {
-
-    companion object{
+object ApiService {
 
         private val retrofit by lazy {
             val logging = HttpLoggingInterceptor()
@@ -24,8 +22,8 @@ class ApiService {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
         }
-        val api by lazy {
-            retrofit.create(GithubInterface::class.java)
+        val API: GithubApi by lazy {
+            retrofit.create(GithubApi::class.java)
         }
-    }
+
 }

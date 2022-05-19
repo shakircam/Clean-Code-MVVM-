@@ -28,8 +28,12 @@ class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
         val githubApiRepository = GithubApiRepositoryImp()
         val viewModelProviderFactory = GithubApiViewModelFactory(githubApiRepository)
         githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory)[GithubApiViewModel::class.java]
+        bindData()
 
 
+    }
+
+    private fun bindData(){
         githubApiViewModel.userResponse.observe(viewLifecycleOwner){ result->
             val user = result.data
             binding.user = GithubUser(
