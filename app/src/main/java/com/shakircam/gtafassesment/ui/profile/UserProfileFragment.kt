@@ -1,7 +1,6 @@
 package com.shakircam.gtafassesment.ui.profile
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -24,9 +23,12 @@ class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         val githubApiRepository = GithubApiRepositoryImp()
         val viewModelProviderFactory = GithubApiViewModelFactory(githubApiRepository)
-        githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory).get(GithubApiViewModel::class.java)
+        githubApiViewModel = ViewModelProvider(this, viewModelProviderFactory)[GithubApiViewModel::class.java]
+
 
         githubApiViewModel.userResponse.observe(viewLifecycleOwner){ result->
             val user = result.data
@@ -35,8 +37,9 @@ class UserProfileFragment : BindingFragment<FragmentUserProfileBinding>() {
                 user?.location,user?.bio,
                 user?.public_repos,user?.public_gists
             )
-            Log.d("tag","image::${user?.avatar_url}")
-            Log.d("tag","bio::${user?.bio}")
+
         }
     }
+
+
 }

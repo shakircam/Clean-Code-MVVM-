@@ -10,5 +10,5 @@
     <string name="bio">Bio: </string>
     <string name="repo">Public Repos: </string>
     <string name="gist">Public Gist: </string>
-    <string name="privat_repo">Private repos:0  </string>
+    <string name="privat_repo">Private repos: 0  </string>
 </resources>

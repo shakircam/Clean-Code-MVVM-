@@ -19,5 +19,7 @@
         android:id="@+id/userProfileFragment"
         android:name="com.shakircam.gtafassesment.ui.profile.UserProfileFragment"
         android:label="User Profile"
-        tools:layout="@layout/fragment_user_profile" />
+        tools:layout="@layout/fragment_user_profile" >
+
+    </fragment>
 </navigation>

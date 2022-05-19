@@ -7,9 +7,11 @@
         <variable
             name="user"
             type="com.shakircam.gtafassesment.model.GithubUser" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/shado_black"
@@ -18,32 +20,33 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:layout_marginStart="10dp"
             loadUserImage="@{user.avatar_url}"
             android:layout_marginTop="30dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
+            android:layout_width="168dp"
+            android:layout_height="168dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guideline"
+            android:id="@+id/leftGuideline"
             app:layout_constraintGuide_begin="80dp"
             android:orientation="vertical"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/guidelineTwo"
+            android:id="@+id/rightGuidelineTwo"
             app:layout_constraintGuide_end="80dp"
             android:orientation="vertical"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/nameTv"
             app:layout_constraintTop_toBottomOf="@id/imageView"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
             android:textSize="22sp"
             android:text="@{user.name}"
             android:textColor="@color/white"
@@ -53,11 +56,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/locationTv"
             app:layout_constraintTop_toBottomOf="@id/nameTv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             android:layout_marginTop="7dp"
+            android:layout_marginStart="35dp"
             android:text="@{user.location}"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -65,9 +68,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/bioTv"
             app:layout_constraintTop_toBottomOf="@id/locationTv"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintEnd_toEndOf="@+id/guidelineTwo"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintEnd_toEndOf="@+id/rightGuidelineTwo"
             android:layout_marginTop="15dp"
+            android:layout_marginStart="10dp"
             bio="@{user}"
             android:textSize="17sp"
             android:maxLines="1"
@@ -78,9 +82,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/publicRepoTv"
             app:layout_constraintTop_toBottomOf="@id/bioTv"
-            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             repo="@{user}"
             android:textSize="17sp"
             android:textColor="@color/white"
@@ -90,9 +94,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/publicGistTv"
             app:layout_constraintTop_toBottomOf="@id/publicRepoTv"
-            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             gist="@{user}"
             android:textSize="17sp"
             android:textColor="@color/white"
@@ -102,9 +106,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/privateRepoTv"
             app:layout_constraintTop_toBottomOf="@id/publicGistTv"
-            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             android:text="@string/privat_repo"
             android:textSize="17sp"
             android:textColor="@color/white"
