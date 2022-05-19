@@ -6,12 +6,12 @@ import com.shakircam.gtafassesment.model.GithubUser
 import com.shakircam.gtafassesment.utils.Resource
 import retrofit2.Response
 
-class GithubApiRepositoryImp  {
-    suspend fun getGithubUserProfile(): Response<GithubUser> {
+class GithubApiRepositoryImp:GithubApiRepository  {
+    override suspend fun getGithubUserProfile(): Response<GithubUser> {
         return ApiService.api.getGithubUserProfile()
     }
 
-     suspend fun getGithubCommit(): Response<MutableList<Commits.CommitsItem>> {
+     override suspend fun getGithubCommit(): Response<MutableList<Commits.CommitsItem>> {
        return ApiService.api.getGithubCommit()
     }
 

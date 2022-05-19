@@ -19,10 +19,13 @@ import com.shakircam.gtafassesment.utils.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : ViewModel() {
+class GithubApiViewModel(private val repository : GithubApiRepository) : ViewModel() {
 
 
     /** RETROFIT */
+    /**  ------ github commits call ----- */
+
+
      var commitsResponse: MutableLiveData<Resource<MutableList<Commits.CommitsItem>>> = MutableLiveData()
      var userResponse: MutableLiveData<Resource<GithubUser>> = MutableLiveData()
 
@@ -43,7 +46,7 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : View
             response.body()?.let { resultResponse ->
 
                 val filterList = mutableListOf<Commits.CommitsItem>()
-                val filterList1 = mutableListOf<Commits.CommitsItem>()
+                val updatedList = mutableListOf<Commits.CommitsItem>()
 
                 /** we are checking user name starts with g & x .If match with condition then we are keeping those a list.After that removing from main list.
                    And finally keeping only last 10 commits   */
@@ -57,19 +60,21 @@ class GithubApiViewModel(private val repository : GithubApiRepositoryImp) : View
 
                 resultResponse.removeAll(filterList)
                 var commitItem = 0
-                for (i in resultResponse){
+                for (item in resultResponse){
 
                     if (commitItem<10){
-                        filterList1.add(i)
+                        updatedList.add(item)
                         commitItem++
                     }
                 }
-                return Resource.Success(filterList1)
+                return Resource.Success(updatedList)
             }
 
         }
         return Resource.Error(response.message())
     }
+
+    /*  ------ github user profile details call ----- */
 
     init {
         getUserProfile()
